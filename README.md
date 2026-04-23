@@ -47,6 +47,7 @@ Run the first cell in `pipeline_project.ipynb`:
 ```python
 import sys
 !{sys.executable} -m pip install matplotlib seaborn scikit-learn nltk pandas numpy textblob joblib -q
+```
 
 ## Testing
 
