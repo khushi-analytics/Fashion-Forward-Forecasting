@@ -31,7 +31,7 @@ Step by step explanation of how to get a dev environment running.
 1. **Clone or download the repository**
 
 ```bash
-git clone https://github.com/udacity/dsnd-pipelines-project.git
+git clone https://github.com/khushi-analytics/Fashion-Forward-Forecasting.git
 ```
 2. **Create and activate a virtual environment**
 
