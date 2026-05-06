@@ -40,13 +40,10 @@ python3 -m venv venv
 source venv/bin/activate        # Mac/Linux
 venv\Scripts\activate           # Windows
 ```
-3. **Install dependencies using the notebook's install cell**
+3. **Install dependencies**
 
-Run the first cell in `pipeline_project.ipynb`:
-
-```python
-import sys
-!{sys.executable} -m pip install matplotlib seaborn scikit-learn nltk pandas numpy textblob joblib -q
+```bash
+python3 -m pip install -r requirements.txt
 ```
 
 ## Testing
@@ -91,18 +88,28 @@ baseline_metrics = evaluate_model(pipeline, X_test, y_test, title="Baseline Logi
 ```
 
 **Grid search tuning**
-Runs a 5-fold stratified cross-validated grid search over regularisation strength, solver, and TF-IDF vocabulary size.
+Runs a 3-fold stratified cross-validated grid search over 4 values of C, evaluating 4 parameter combinations total.
 
 ```python
 grid_search.fit(X_train, y_train)
 print("Best params:", grid_search.best_params_)
 ```
 
+**Pipeline serialisation**
+Saves the best pipeline to disk and verifies it loads and predicts correctly on a raw input.
+
+​```python
+joblib.dump(best_pipeline, "pipeline.pkl")
+loaded = joblib.load("pipeline.pkl")
+​```
+
 ## Project Instructions
 
 This project builds a supervised machine learning pipeline for StyleSense to predict customer product recommendations. The deliverables are:
 
 **`pipeline_project.ipynb`** — Jupyter Notebook containing the full pipeline from data loading through to evaluation and serialisation. The notebook must run end-to-end without errors via Kernel → Restart & Run All.
+
+**`pipeline.pkl`** — Serialised trained pipeline produced by running the notebook, ready for inference without retraining.
 
 **`reviews.csv`** — The dataset used to train and evaluate the model (provided separately).
 
@@ -112,7 +119,7 @@ The pipeline covers:
 - Advanced NLP features: sentiment polarity (TextBlob) and adjective count (NLTK POS tagging)
 - Numerical and categorical feature preprocessing
 - Logistic Regression classifier with class imbalance handling
-- Hyperparameter tuning via GridSearchCV with stratified 5-fold cross-validation
+- Hyperparameter tuning via GridSearchCV with stratified 3-fold cross-validation across 4 values of regularisation strength (C)
 - Evaluation using accuracy, precision, recall, F1, and ROC-AUC
 
 ## Built With
