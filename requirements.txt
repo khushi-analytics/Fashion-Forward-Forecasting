@@ -2,3 +2,9 @@ scikit-learn
 pandas
 spacy
 notebook
+numpy
+nltk
+textblob
+matplotlib
+seaborn
+joblib
